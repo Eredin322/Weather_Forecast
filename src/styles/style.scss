@@ -1,7 +1,7 @@
 @import 'fonts.scss';
 
 * {
-    font-family: 'Poppins';
+    font-family: 'Poppins', 'Montserrat';
     color: #ffffff;
 }
 body{
@@ -26,28 +26,58 @@ section {
         .menu {
             display: flex;
             list-style-type: none;
+            text-transform: capitalize;
             li {
+                position: relative;
                 margin: 0 20px;
                 font-size: 25px;
                 color: white;
-                border-radius: 100%;
                 font-weight: 300;
                 transition: 0.3s all;
+                a {
+                    text-decoration: none;
+                }
                 &:hover {
-                    font-weight: 500;
-                    // box-shadow: 3px 3px 20px white;
+                    background: -webkit-linear-gradient(124deg, #78CFFF, #CAECFF);
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                select {
+                    appearance: none;
+                    -moz-appearance:none; /* Firefox */
+                    -webkit-appearance:none; /* Safari and Chrome */
+                    background: none;
+                    padding-right: 25px;
+                    border: none;
+                    font-size: 25px;
+                    color: white;
+                    font-weight: 300;
+                    transition: 0.3s all;
+                    cursor: pointer;
+                    outline: none;
+                    option{
+                        background: #24343D;
+                        cursor: pointer;
+                    }
+                    &:focus{
+                        border: none;
+                    }
                 }
             }
         }
         .sign_up {
-            width: 165px;
+            min-width: 165px;
             height: 78px;
+            text-transform: capitalize;
             box-shadow: inset 7px 7px 10px 0 rgba(79, 136, 167, 0.3);
             background-image: linear-gradient(180deg, #3a5e72 5%, #5c93b1 132%);
             font-weight: 500;
             font-size: 25px;
             border-radius: 20px;
-            border: none
+            border: none;
+            &:hover {
+                background-image: linear-gradient( #3a5e72 132%, #5c93b1 5%);
+            }
         }
         .search {
             width: 328px;
@@ -60,9 +90,11 @@ section {
             line-height: center;
             padding: 0 30px;
             border: none;
-
+            z-index: 1;
+            text-transform: capitalize;
         }
         .filter {
+            position: relative;
             width: 780px;
             display: flex;
             justify-content: space-between;
@@ -74,8 +106,12 @@ section {
             font-weight: 500;
             overflow: none;
             text-align: center;
+            .select_wrapper {
+                position: relative;
+            }
             select {
-                padding: 5px 5px;
+                padding: 5px 10px;
+                padding-right: 25px;
                 margin: 0 14px;
                 border-radius: 15px;
                 border-style: solid;
@@ -83,16 +119,25 @@ section {
                 background: #24343D;
                 font-size: 23px;
                 height: 75px;
+                appearance: none;
+                -moz-appearance:none; /* Firefox */
+                -webkit-appearance:none; /* Safari and Chrome */
+                }
+                img {
+                    &:nth-child(1){
+                        right: 20px;
+                    }
                 }
             }
         .card {
             position: relative;
             margin-top: 82px;
-            padding-top: 200px;
+            padding-top: 180px;
             padding-left: 52px;
             padding-right: 52px;
-            width: 223px;
-            min-height: 286px;
+            padding-bottom: 35px;
+            width: 273px;
+            min-height: 200px;
             border-radius: 20px;
             box-shadow: 10px 9px 70px 0 rgba(36, 53, 62, 0.4);
             background-color: #24353e;
@@ -100,19 +145,35 @@ section {
             justify-content: space-between;
             flex-direction: column;
             align-items: left;
-            h3 {
+            font-size: 20px;
+            .main_info {
                 font-size: 40px;
+                display: inline-block;
                 .city_info {
                     font-weight: bold;
+                }
+                .temp {
+                    font-weight: 300;
                 }
             }
             .icon {
                 position: absolute;
-                top: 0;
-                right: 111px;
-                img {
-                    width: 100px;
+                top: -150px;
+                left: 60px;
+                &_eclipse {
+                    position: absolute;
+                    top: -100px;
+                    width: 228px;
+                    height: 228px;
+                    flex-grow: 0;
+                    margin: 98.2px 0 221.3px 115px;
+                    -webkit-filter: blur(120px);
+                    filter: blur(120px);
+                    background-image: radial-gradient(circle at 0 0, #74b4d8, rgba(73, 101, 117, 0));
                 }
+            }
+            .weather_type {
+                text-transform: capitalize;
             }
         }
         }
@@ -131,3 +192,22 @@ section {
             -webkit-text-fill-color: transparent;
         }
     }
+
+    .option_arrow {
+        position: absolute;
+        top: 10px;
+        left: 35px;
+        width: 15px;
+        transition: 0.3s all;
+        &_filter{
+            width: 15px;
+            position: absolute;
+            top: 30px;
+            right: 20px;
+            transition: 0.3s all;
+        }
+    }
+
+.rotate {
+    transform: rotate(180deg);
+}
