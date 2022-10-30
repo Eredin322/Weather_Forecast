@@ -8,6 +8,26 @@ function clearSearch(){
 
 document.querySelector('.search').onclick = clearSearch;
 
+// Логика появления крестика
+let crossCount = 0;
+function crossAppear(){
+    if (crossCount ==  0){
+        document.querySelector('.cross').classList.toggle('dn');
+        crossCount++;
+    }
+}
+
+document.querySelector('.search').oninput = crossAppear;
+
+
+// Логика работы крестика
+function crossClear(){
+    document.querySelector('.search').value = '';
+    crossCount--;
+}
+    
+document.querySelector('.cross').onclick = crossClear;
+
 //Смена языка
 const select = document.querySelector('select');
 const allLang = ['en', 'ru'];
@@ -83,49 +103,24 @@ function changeLanguage(){
 }
 changeLanguage();
 
-function getAllCitiesWeather(){
-    // Получаем язык на котором будем выводить
+// function getAllCitiesWeather(){
+//         for (let i = 0; i < cities.length; i++){
+//         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cities[i]}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
+//         .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
+//         .then(function (data){
+//             allCities.push([]);
+//             allCities[i].push(data.name);
+//             allCities[i].push(data.main.temp);
+//             allCities[i].push(data.wind.speed);
+//             allCities[i].push(data.weather[0].description);
+//             allCities[i].push(data.timezone);
+//         })
+//     }
+// }
 
-    // fetch(`https://api.openweathermap.org/data/2.5/weather?q=Bishkek&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
-    // .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
-    // .then(function (data){
-    //     console.log(data);
-    //     if (data.weather[0]['icon'] == "01d"){
-    //         document.querySelector('.card .icon').innerHTML = `<img src="img/ClearSky.png">`;
-    //     } else {
-    //         document.querySelector('.card .icon').innerHTML = `<img src="img/Clouds.png">`;
-    //     }
-        
-    //     document.querySelector('.card .city_info').innerHTML = data.name;
-    //     document.querySelector('.card .temp').innerHTML = data.main.temp + `&deg;`;
-    //     if (hash == 'en') {
-    //         document.querySelector('.wind_speed').innerHTML ='Wind Speed : ' + data.wind.speed + ' m/s';
-    //         document.querySelector('.weather_type').innerHTML = data.weather[0].description;
-    //     } else {
-    //         document.querySelector('.wind_speed').innerHTML ='Скорость ветра : ' + data.wind.speed + ' м/с';
-    //         document.querySelector('.weather_type').innerHTML = data.weather[0].description;
-    //     }
-    //     document.querySelector('.time').innerHTML = `GTM : +${data.timezone / 3600}`;
-    // })
-    // Создаем массив со всеми городами
-        for (let i = 0; i < cities.length; i++){
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cities[i]}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
-        .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
-        .then(function (data){
-            allCities.push([]);
-            allCities[i].push(data.name);
-            allCities[i].push(data.main.temp);
-            allCities[i].push(data.wind.speed);
-            allCities[i].push(data.weather[0].description);
-            allCities[i].push(data.timezone);
-        })
-    }
-}
+// console.log(allCities);
 
-console.log(allCities);
-
-getAllCitiesWeather();
-
+// getAllCitiesWeather();
 
 function setTheCard1(index){
 
