@@ -120,6 +120,11 @@ function getCityWeather(){
         selectedCities[CityCount].push(data.timezone);
         if(selectedCities[CityCount] == undefined){
             document.querySelector('.alarm').classList.remove('zeroOpt');
+        } else {
+            document.createElement('div').classList.add(`card${CityCount}`);
+            console.log(document.createElement('div').classList.add('card'));
+            // newCard.innerHTML = '<div class="icon"></div><div class="icon_eclipse"></div><div class="main_info"><span class="city_info"></span><span class="temp"></span></div><div class="wind_speed"></div><div class="time"></div><div class="weather_type"></div>';
+            // document.querySelector('.card__container').appendChild(newCard);
         }
         CityCount++;
     })
@@ -129,28 +134,28 @@ document.querySelector('.search__btn').onclick = getCityWeather;
 
 function setTheCard(index){
 
-    if (allCities[index][3] == "clear sky"){
+    if (selectedCities[index][3] == "clear sky"){
         document.querySelector('.card .icon').innerHTML = `<img src="img/ClearSky.png">`;
-    } else if (allCities[index][3] == "few clouds" || allCities[index][3] == "scattered clouds" || allCities[index][3] == "broken clouds"){
+    } else if (selectedCities[index][3] == "few clouds" || selectedCities[index][3] == "scattered clouds" || selectedCities[index][3] == "broken clouds"){
         document.querySelector('.card .icon').innerHTML = `<img src="img/Clouds.png">`;
-    } else if (allCities[index][3] == "thunderstorm"){
+    } else if (selectedCities[index][3] == "thunderstorm"){
         document.querySelector('.card .icon').innerHTML = `<img src="img/Thunder.png">`;
-    } else if (allCities[index][3] == "rain"){
+    } else if (selectedCities[index][3] == "rain"){
         document.querySelector('.card .icon').innerHTML = `<img src="img/Rain.png">`;
-    } else if (allCities[index][3] == "shower rain"){
+    } else if (selectedCities[index][3] == "shower rain"){
         document.querySelector('.card .icon').innerHTML = `<img src="img/ShowerRain.png">`;
     } else {
         document.querySelector('.card .icon').innerHTML = `<img src="img/aFewClouds.png">`;
     }
     
-    document.querySelector('.card1 .city_info').innerHTML = allCities[index][0];
-    document.querySelector('.card1 .temp').innerHTML = allCities[index][1] + ' ' + `&deg;С`;
+    document.querySelector('.card1 .city_info').innerHTML = selectedCities[index][0];
+    document.querySelector('.card1 .temp').innerHTML = selectedCities[index][1] + ' ' + `&deg;С`;
     if (hash == 'en') {
-        document.querySelector('.card1 .wind_speed').innerHTML ='Wind Speed : ' + allCities[index][2] + ' m/s';
-        document.querySelector('.card1 .weather_type').innerHTML = allCities[index][3];
+        document.querySelector('.card1 .wind_speed').innerHTML ='Wind Speed : ' + selectedCities[index][2] + ' m/s';
+        document.querySelector('.card1 .weather_type').innerHTML = selectedCities[index][3];
     } else if (hash == 'ru') {
-        document.querySelector('.card1 .wind_speed').innerHTML ='Скорость ветра : ' + allCities[index][2] + ' м/с';
-        document.querySelector('.card1 .weather_type').innerHTML = allCities[index][3];
+        document.querySelector('.card1 .wind_speed').innerHTML ='Скорость ветра : ' + selectedCities[index][2] + ' м/с';
+        document.querySelector('.card1 .weather_type').innerHTML = selectedCities[index][3];
     }
-    document.querySelector('.time').innerHTML = `GTM : +${allCities[index][4] / 3600}`;
+    document.querySelector('.time').innerHTML = `GTM : +${selectedCities[index][4] / 3600}`;
 }
