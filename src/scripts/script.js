@@ -10,19 +10,21 @@ document.querySelector('.search').onclick = clearSearch;
 
 // Логика появления крестика
 let crossCount = 0;
-function crossAppear(){
+function crossAppearAndAlarmDissappear(){
     if (crossCount ==  0){
-        document.querySelector('.cross').classList.toggle('dn');
+        document.querySelector('.cross').classList.toggle('zeroOpt');
         crossCount++;
     }
+    document.querySelector('.alarm').classList.add('zeroOpt');
 }
 
-document.querySelector('.search').oninput = crossAppear;
+document.querySelector('.search').oninput = crossAppearAndAlarmDissappear;
 
 
 // Логика работы крестика
 function crossClear(){
     document.querySelector('.search').value = '';
+    document.querySelector('.cross').classList.toggle('zeroOpt');    
     crossCount--;
 }
     
@@ -78,8 +80,8 @@ document.querySelector('#coldest-warmest').onfocus = rotateLangArrow2;
 document.querySelector('#coldest-warmest').onblur = rotateLangArrow2;
 document.querySelector('#temp').onfocus = rotateLangArrow3;
 document.querySelector('#temp').onblur = rotateLangArrow3;
-document.querySelector('#weather').onfocus = rotateLangArrow4;
-document.querySelector('#weather').onblur = rotateLangArrow4;
+// document.querySelector('#weather').onfocus = rotateLangArrow4;
+// document.querySelector('#weather').onblur = rotateLangArrow4;
 
 
 // Меняет язык сайта 
@@ -103,26 +105,29 @@ function changeLanguage(){
 }
 changeLanguage();
 
-// function getAllCitiesWeather(){
-//         for (let i = 0; i < cities.length; i++){
-//         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cities[i]}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
-//         .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
-//         .then(function (data){
-//             allCities.push([]);
-//             allCities[i].push(data.name);
-//             allCities[i].push(data.main.temp);
-//             allCities[i].push(data.wind.speed);
-//             allCities[i].push(data.weather[0].description);
-//             allCities[i].push(data.timezone);
-//         })
-//     }
-// }
+let selectedCities = [];
+let CityCount = 0;
+function getCityWeather(){
+    let val = document.querySelector('.search').value;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
+    .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
+    .then(function (data){
+        selectedCities.push([]);
+        selectedCities[CityCount].push(data.name);
+        selectedCities[CityCount].push(data.main.temp);
+        selectedCities[CityCount].push(data.wind.speed);
+        selectedCities[CityCount].push(data.weather[0].description);
+        selectedCities[CityCount].push(data.timezone);
+        if(selectedCities[CityCount] == undefined){
+            document.querySelector('.alarm').classList.remove('zeroOpt');
+        }
+        CityCount++;
+    })
+    console.log(selectedCities);
+}
+document.querySelector('.search__btn').onclick = getCityWeather;
 
-// console.log(allCities);
-
-// getAllCitiesWeather();
-
-function setTheCard1(index){
+function setTheCard(index){
 
     if (allCities[index][3] == "clear sky"){
         document.querySelector('.card .icon').innerHTML = `<img src="img/ClearSky.png">`;
@@ -149,14 +154,3 @@ function setTheCard1(index){
     }
     document.querySelector('.time').innerHTML = `GTM : +${allCities[index][4] / 3600}`;
 }
-
-function searchHere(){
-    let searchValue = document.querySelector('.search').value;
-    let filteredCities = [];
-    for(let i = 0; i < allCities.length; i++){
-        if(allCities[i][0] == searchValue ){
-            setTheCard1(i);
-        }
-    }
-}
-document.querySelector('.search').oninput = searchHere;
