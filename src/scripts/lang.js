@@ -16,8 +16,8 @@ const langArr = {
         'en': 'sign up',
     },
     'h2' : {
-        'ru': 'Узнайте погоду во всем мире с помощью <span>Dark Weather!</span>',
-        'en': 'Seing the weather of the whole world with <span>Dark Weather!</span>',
+        'ru': 'Узнайте погоду в любой точке мира с помощью <span class="waviy"><span style="--i:1">D</span><span style="--i:2">a</span><span style="--i:3">r</span><span style="--i:4">k</span><span style="margin: 4px"> </span><span style="--i:6">W</span><span style="--i:7">e</span><span style="--i:8">a</span><span style="--i:9">t</span><span style="--i:10">h</span><span style="--i:11">e</span><span style="--i:12">r</span><span style="--i:13">!</span></span>',
+        'en': 'Seing the weather of the whole world with <span class="waviy"><span style="--i:1">D</span><span style="--i:2">a</span><span style="--i:3">r</span><span style="--i:4">k</span><span style="margin: 4px"> </span><span style="--i:6">W</span><span style="--i:7">e</span><span style="--i:8">a</span><span style="--i:9">t</span><span style="--i:10">h</span><span style="--i:11">e</span><span style="--i:12">r</span><span style="--i:13">!</span></span>',
     },
     'search' : {
         'ru': 'искать здесь',
