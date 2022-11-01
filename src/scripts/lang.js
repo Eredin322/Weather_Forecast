@@ -27,4 +27,12 @@ const langArr = {
         'ru': 'Фильтры',
         'en': 'Filters',
     },
+    'f1' : {
+        'ru': 'Теплее',
+        'en': 'Coldest',
+    },
+    'f2' : {
+        'ru': 'Холоднее',
+        'en': 'Warmest',
+    },
 }
