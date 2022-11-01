@@ -132,6 +132,22 @@ function getCityWeather(){
 }
 document.querySelector('.search__btn').onclick = getCityWeather;
 
+// Кнопка регистрации
+const toggleModal = () => {
+    const { classList } = document.body;
+    if (classList.contains('open')){
+        classList.remove('open');
+        classList.add('closed');
+    } else {
+        classList.remove('closed');
+        classList.add('open');
+    }
+}
+
+document.querySelector('.modal-background').onclick = toggleModal;
+document.querySelector('.sign_up').onclick = toggleModal;
+
+
 function setTheCard(index){
 
     if (selectedCities[index][3] == "clear sky"){
