@@ -1,4 +1,5 @@
 //Очистка поиска при нажатии
+let defaultSearchValue = document.querySelector('.search').value;
 function clearSearch(){
     let val = document.querySelector('.search').value;
     if (val == 'search here' || val == 'искать здесь'){
@@ -7,6 +8,16 @@ function clearSearch(){
 }
 
 document.querySelector('.search').onclick = clearSearch;
+
+//Наполнение пустого поиска
+function fillSearch(){
+    let val = document.querySelector('.search').value;
+    if (val == ''){
+        document.querySelector('.search').value = defaultSearchValue;
+    };
+}
+
+document.querySelector('.search').addEventListener("focusout", fillSearch);
 
 // Логика появления крестика
 let crossCount = 0;
