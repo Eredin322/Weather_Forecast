@@ -43,14 +43,13 @@ document.querySelector('.search').oninput = crossAppearAndAlarmDissappear;
 function crossClear(){
     document.querySelector('.search').value = '';
     document.querySelector('.cross').classList.toggle('zeroOpt');    
+    document.querySelector('.search').focus();
     crossCount--;
 }
     
 document.querySelector('.cross').onclick = crossClear;
 
 //Смена языка
-
-
 select.addEventListener('change', changeUrlLanguage);
 
 function changeUrlLanguage(){
@@ -125,8 +124,9 @@ function getCityWeatherAndAlarmIfWrongCity(){
     let val = document.querySelector('.search').value;
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
     .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
-    .then(function (data){  
+    .then(function (data){
         try{
+            console.log(data);
             selectedCities.push([]);
             selectedCities[CityCount].push(data.name);
             selectedCities[CityCount].push(data.main.temp);
@@ -153,6 +153,7 @@ function cardCreation(){
     let wind_speed = document.createElement('div');
     let weather_type = document.createElement('div');
     let time = document.createElement('div');
+    let GTM = document.createElement('div');
 
     card.classList.add('card');
     icon.classList.add('icon');
@@ -163,6 +164,7 @@ function cardCreation(){
     wind_speed.classList.add('wind_speed');
     weather_type.classList.add('weather_type');
     time.classList.add('time');
+    GTM.classList.add('GTM');
 
     card.appendChild(icon);
     card.appendChild(icon_eclipse);
@@ -172,6 +174,7 @@ function cardCreation(){
     card.appendChild(wind_speed);
     card.appendChild(weather_type);
     card.appendChild(time);
+    card.appendChild(GTM);
 
     document.querySelector('.card__container').prepend(card);
     fillTheCard(CityCount);
@@ -195,24 +198,72 @@ document.querySelector('.sign_up').onclick = toggleModal;
 
 
 function fillTheCard(index){
-
-    if (selectedCities[index][3] == "clear sky"){
-        document.querySelector('.card .icon').innerHTML = `<img src="img/ClearSky.png">`;
-    } else if (selectedCities[index][3] == "few clouds" || selectedCities[index][3] == "scattered clouds" || selectedCities[index][3] == "broken clouds"){
-        document.querySelector('.card .icon').innerHTML = `<img src="img/Clouds.png">`;
-    } else if (selectedCities[index][3] == "thunderstorm"){
-        document.querySelector('.card .icon').innerHTML = `<img src="img/Thunder.png">`;
-    } else if (selectedCities[index][3] == "rain"){
-        document.querySelector('.card .icon').innerHTML = `<img src="img/Rain.png">`;
-    } else if (selectedCities[index][3] == "shower rain"){
-        document.querySelector('.card .icon').innerHTML = `<img src="img/ShowerRain.png">`;
+    let today = new Date();
+    const hours = today.getUTCHours();
+    const minutes = today.getUTCMinutes();
+    const seconds = today.getUTCSeconds();
+    if(hours + (selectedCities[index][4] / 3600) > 19){
+        if (selectedCities[index][3] == "clear sky"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ClearNight.png">`;
+        } else if (selectedCities[index][3] == "overcast clouds" || selectedCities[index][3] == "broken clouds"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/CloudyNight.png">`;
+        } else if (selectedCities[index][3] == "few clouds" || selectedCities[index][3] == "scattered clouds"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/FewCloudsNight.png">`;
+        } else if (selectedCities[index][3] == "mist"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/MistNight.png">`;
+        } else if (selectedCities[index][3] == "rain"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainNight.png">`;
+        } else if (selectedCities[index][3] == "shower rain"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ShowerRainNight.png">`;
+        } else if (selectedCities[index][3] == "snow"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/snowNight.png">`;
+        } else if (selectedCities[index][3] == "thunderstorm"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ThunderstormNight.png">`;
+        } else if (selectedCities[index][3] == "tornado"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/Tornado.png">`;
+        } else{
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/AnythingElse.png">`;
+        }
     } else {
-        document.querySelector('.card .icon').innerHTML = `<img src="img/aFewClouds.png">`;
+        if (selectedCities[index][3] == "clear sky"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ClearDay.png">`;
+        } else if (selectedCities[index][3] == "overcast clouds" || selectedCities[index][3] == "broken clouds"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/CloudyDay.png">`;
+        } else if (selectedCities[index][3] == "few clouds" || selectedCities[index][3] == "scattered clouds"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/FewCloudsDay.png">`;
+        } else if (selectedCities[index][3] == "mist"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/MistDay.png">`;
+        } else if (selectedCities[index][3] == "rain"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainDay.png">`;
+        } else if (selectedCities[index][3] == "shower rain"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ShowerRainDay.png">`;
+        } else if (selectedCities[index][3] == "snow"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/snowDay.png">`;
+        } else if (selectedCities[index][3] == "thunderstorm"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ThunderstormDay.png">`;
+        } else if (selectedCities[index][3] == "tornado"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/Tornado.png">`;
+        } else{
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/AnythingElse.png">`;
+        }
     }
+    
     
     document.querySelector('.card .city_info').innerHTML = selectedCities[index][0];
     document.querySelector('.card .temp').innerHTML = selectedCities[index][1] + ' ' + `&deg;С`;
-    document.querySelector('.card .wind_speed').innerHTML = 'Wind Speed : ' + selectedCities[index][2] + ' m/s';
+    if (hash === 'en'){
+        document.querySelector('.card .wind_speed').innerHTML = 'Wind Speed : ' + selectedCities[index][2] + ' m/s';
+        document.querySelector('.card .time').innerHTML = `Local time: ${hours + (selectedCities[index][4] / 3600)}:${minutes}:${seconds}`;
+    } else if (hash === 'ru'){
+        document.querySelector('.card .wind_speed').innerHTML = 'Скорость ветра : ' + selectedCities[index][2] + ' m/s';
+        document.querySelector('.card .time').innerHTML = `Местное время: ${hours + (selectedCities[index][4] / 3600)}:${minutes}:${seconds}`;
+    }
     document.querySelector('.card .weather_type').innerHTML = selectedCities[index][3];
-    document.querySelector('.time').innerHTML = `GTM : +${selectedCities[index][4] / 3600}`;
+
+    if (selectedCities[index][4] / 3600 > 0){
+        document.querySelector('.GTM').innerHTML = `GTM : +${selectedCities[index][4] / 3600}`;
+    } else {
+        document.querySelector('.GTM').innerHTML = `GTM : ${selectedCities[index][4] / 3600}`;
+    }
+
 }
