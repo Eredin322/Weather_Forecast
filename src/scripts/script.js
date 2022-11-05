@@ -6,7 +6,6 @@ let hash = window.location.hash;
 let selectedCities = [];
 let CityCount = 0;
 
-//Очистка поиска при нажатии
 function clearSearch(){
     let val = document.querySelector('.search').value;
     if (val == 'search here' || val == 'искать здесь'){
@@ -16,7 +15,6 @@ function clearSearch(){
 
 document.querySelector('.search').onclick = clearSearch;
 
-//Наполнение пустого поиска
 function fillSearch(){
     let val = document.querySelector('.search').value;
     if (val == ''){
@@ -25,8 +23,6 @@ function fillSearch(){
 }
 
 document.querySelector('.search').addEventListener("focusout", fillSearch);
-
-// Логика появления крестика
 
 function crossAppearAndAlarmDissappear(){
     if (crossCount ==  0){
@@ -38,27 +34,21 @@ function crossAppearAndAlarmDissappear(){
 
 document.querySelector('.search').oninput = crossAppearAndAlarmDissappear;
 
-
-// Логика работы крестика
 function crossClear(){
     document.querySelector('.search').value = '';
     document.querySelector('.cross').classList.toggle('zeroOpt');    
     document.querySelector('.search').focus();
     crossCount--;
 }
-    
 document.querySelector('.cross').onclick = crossClear;
 
-//Смена языка
-select.addEventListener('change', changeUrlLanguage);
 
+select.addEventListener('change', changeUrlLanguage);
 function changeUrlLanguage(){
     let lang = select.value;
     location.href = window.location.pathname + '#' + lang;
     location.reload();
 }
-
-//Вертим стрелочки в Select
 
 
 function rotateLangArrow1 (){
@@ -98,8 +88,7 @@ document.querySelector('#temp').onfocus = rotateLangArrow3;
 document.querySelector('#temp').onblur = rotateLangArrow3;
 
 
-// Меняет язык сайта 
-
+// Приписывает #en/#ru в поисковой строке
 hash = hash.substr(1);
 if (!allLang.includes(hash)){
     location.href = window.location.pathname + '#en';
@@ -181,7 +170,7 @@ function cardCreation(){
 }
 document.querySelector('.search__btn').onclick = getCityWeatherAndAlarmIfWrongCity;
 
-// Кнопка регистрации
+
 const toggleModal = () => {
     const { classList } = document.body;
     if (classList.contains('open')){

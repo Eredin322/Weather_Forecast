@@ -353,19 +353,15 @@ body.closed .modal {
 
 .content {
     position: relative;
+    & h1:nth-child(1) {
+        color: transparent;
+        -webkit-text-stroke: 3px #ffffff;
+    }
+    & h1:nth-child(2) {
+        color: #ffffff;
+        animation: animate 4s ease-in-out infinite;
+    }
 }
-
-
-.content h1:nth-child(1) {
-    color: transparent;
-    -webkit-text-stroke: 3px #ffffff;
-}
-
-.content h1:nth-child(2) {
-    color: #ffffff;
-    animation: animate 4s ease-in-out infinite;
-}
-
 
 .control {
     border: 0;
@@ -384,19 +380,17 @@ body.closed .modal {
     padding: 40px 30px 40px;
     border-radius: 1.25rem;
     text-align: center;
-}
-
-.login-card > h2 {
-    font-size: 36px;
-    font-weight: 600;
-    margin: 0 0 6px;
-}
-
-.login-card > h3 {
-    color: #837f90;
-    margin: 0 0 40px;
-    font-weight: 500;
-    font-size: 1rem;
+    & > h2 {
+        font-size: 36px;
+        font-weight: 600;
+        margin: 0 0 6px;
+    }
+    & > h3 {
+        color: #837f90;
+        margin: 0 0 40px;
+        font-weight: 500;
+        font-size: 1rem;
+    }
 }
 
 .login-form {
