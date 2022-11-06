@@ -1,4 +1,5 @@
 @import 'fonts.scss';
+@import 'carousel.scss';
 
 * {
     font-family: 'Poppins', 'Montserrat';
@@ -212,7 +213,7 @@ section {
 
 .card__container{
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     position: relative;
     .card {
@@ -330,7 +331,7 @@ body.open .modal-background {
     left: 50%;
     translate: -50% -50%;
     width: 400px;
-    // padding: 48px 40px;
+    z-index: 999;
     border-radius: 12px;
     background-color: #24353e;
     color: #f9f9f9;
@@ -370,14 +371,14 @@ body.closed .modal {
     width: 100%;
     height: 56px;
     padding: 0 16px;
-    background: #edeaf7;
+    background: #f0f0f0;
     color: #5a4f79;
     font-family: inherit;
     font-size: 16px;
     transition: 0.4s;
 }
 .login-card {
-    padding: 40px 30px 40px;
+    padding: 25px 30px 40px;
     border-radius: 1.25rem;
     text-align: center;
     & > h2 {
@@ -386,8 +387,8 @@ body.closed .modal {
         margin: 0 0 6px;
     }
     & > h3 {
-        color: #837f90;
-        margin: 0 0 40px;
+        color: #f0f0f0;
+        margin: 0 0 20px;
         font-weight: 500;
         font-size: 1rem;
     }
@@ -409,7 +410,7 @@ body.closed .modal {
     width: 110.5%;
     height: 56px;
     padding: 0 16px;
-    color: #f9f9f9;
+    color: #ffffff;
     border: 0;
     font-size: 1rem;
     font-weight: 600;

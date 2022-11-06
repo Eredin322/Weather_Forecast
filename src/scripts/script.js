@@ -122,6 +122,7 @@ function getCityWeatherAndAlarmIfWrongCity(){
             selectedCities[CityCount].push(data.wind.speed);
             selectedCities[CityCount].push(data.weather[0].description);
             selectedCities[CityCount].push(data.timezone);
+            selectedCities[CityCount].push(data.weather[0].main);
             cardCreation()
         } catch {
             document.querySelector('.alarm').classList.remove('zeroOpt');
@@ -194,45 +195,45 @@ function fillTheCard(index){
     if(hours + (selectedCities[index][4] / 3600) > 19){
         if (selectedCities[index][3] == "clear sky"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ClearNight.png">`;
-        } else if (selectedCities[index][3] == "overcast clouds" || selectedCities[index][3] == "broken clouds"){
+        } else if (selectedCities[index][3] === "overcast clouds" || selectedCities[index][3] == "broken clouds"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/CloudyNight.png">`;
-        } else if (selectedCities[index][3] == "few clouds" || selectedCities[index][3] == "scattered clouds"){
+        } else if (selectedCities[index][3] === "few clouds" || selectedCities[index][3] == "scattered clouds"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/FewCloudsNight.png">`;
-        } else if (selectedCities[index][3] == "mist"){
+        } else if (selectedCities[index][5] === "Mist"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/MistNight.png">`;
-        } else if (selectedCities[index][3] == "rain"){
-            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainNight.png">`;
-        } else if (selectedCities[index][3] == "shower rain"){
+        } else if (selectedCities[index][5] === 'Drizzle'){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ShowerRainNight.png">`;
-        } else if (selectedCities[index][3] == "snow"){
+        }  else if (selectedCities[index][5] == "Rain"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainNight.png">`;
+        } else if (selectedCities[index][5] === "snow"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/snowNight.png">`;
-        } else if (selectedCities[index][3] == "thunderstorm"){
+        } else if (selectedCities[index][5] === "Thunderstorm"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ThunderstormNight.png">`;
-        } else if (selectedCities[index][3] == "tornado"){
+        } else if (selectedCities[index][3] === "tornado"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/Tornado.png">`;
-        } else{
+        } else {
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/AnythingElse.png">`;
         }
     } else {
         if (selectedCities[index][3] == "clear sky"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ClearDay.png">`;
-        } else if (selectedCities[index][3] == "overcast clouds" || selectedCities[index][3] == "broken clouds"){
+        } else if (selectedCities[index][3] === "overcast clouds" || selectedCities[index][3] == "broken clouds"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/CloudyDay.png">`;
-        } else if (selectedCities[index][3] == "few clouds" || selectedCities[index][3] == "scattered clouds"){
+        } else if (selectedCities[index][3] === "few clouds" || selectedCities[index][3] == "scattered clouds"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/FewCloudsDay.png">`;
-        } else if (selectedCities[index][3] == "mist"){
+        } else if (selectedCities[index][5] === "Mist"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/MistDay.png">`;
-        } else if (selectedCities[index][3] == "rain"){
-            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainDay.png">`;
-        } else if (selectedCities[index][3] == "shower rain"){
+        } else if (selectedCities[index][5] === 'Drizzle'){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ShowerRainDay.png">`;
-        } else if (selectedCities[index][3] == "snow"){
+        }  else if (selectedCities[index][5] == "Rain"){
+            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainDay.png">`;
+        } else if (selectedCities[index][5] === "snow"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/snowDay.png">`;
-        } else if (selectedCities[index][3] == "thunderstorm"){
+        } else if (selectedCities[index][5] === "Thunderstorm"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ThunderstormDay.png">`;
-        } else if (selectedCities[index][3] == "tornado"){
+        } else if (selectedCities[index][3] === "tornado"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/Tornado.png">`;
-        } else{
+        } else {
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/AnythingElse.png">`;
         }
     }
