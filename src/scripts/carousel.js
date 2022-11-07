@@ -1,4 +1,4 @@
-(function() {
+function carousel() {
     "use strict";
   
     var carousel = document.getElementsByClassName('carousel')[0],
@@ -15,17 +15,16 @@
         resize();
         move(Math.floor(items.length / 2));
         bindEvents();
-      
-        timer();
+        // timer();
     }
     
     function resize() {
         width = Math.max(window.innerWidth * .25, 275),
         height = window.innerHeight * .5,
         totalWidth = width * items.length;
-      
+    
         slider.style.width = totalWidth + "px";
-      
+    
         for(var i = 0; i < items.length; i++) {
             let item = items[i];
             item.style.width = (width - (margin * 2)) + "px";
@@ -34,11 +33,11 @@
     }
     
     function move(index) {
-      
+    
         if(index < 1) index = items.length;
         if(index > items.length) index = 1;
         currIndex = index;
-      
+    
         for(var i = 0; i < items.length; i++) {
             let item = items[i],
                 box = item.getElementsByClassName('item__3d-frame')[0];
@@ -57,18 +56,18 @@
     function timer() {
         clearInterval(interval);    
         interval = setInterval(() => {
-          move(++currIndex);
+            move(++currIndex);
         }, intervalTime);    
     }
     
     function prev() {
       move(--currIndex);
-      timer();
+    //   timer();
     }
     
     function next() {
       move(++currIndex);    
-      timer();
+    //   timer();
     }
     
     
@@ -80,4 +79,4 @@
 
     init();
     
-})();
+};

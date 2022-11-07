@@ -7,6 +7,7 @@
 }
 body{
     background-color: #676767;
+    width: 100%;
 }
 
 section {
@@ -138,7 +139,7 @@ section {
         }
         .filter {
             position: relative;
-            width: 480px;
+            width: 500px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -211,15 +212,14 @@ section {
         }
     }
 
-.card__container{
+.carousel__slider{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     position: relative;
     .card {
         position: relative;
-        margin-top: 82px;
-        padding-top: 200px;
+        padding-top: 230px;
         padding-left: 52px;
         padding-right: 52px;
         padding-bottom: 35px;
@@ -241,8 +241,10 @@ section {
         .main_info {
             font-size: 40px;
             display: inline-block;
+            z-index: 2;
             .city_info {
                 font-weight: bold;
+                z-index: 2;
             }
             .temp {
                 font-weight: 300;
@@ -250,15 +252,15 @@ section {
         }
         .icon {
             position: absolute;
-            top: -80px;
-            left: 90px;
+            top: -65px;
+            left: 120px;
             img {
                 width: 300px;
                 // height: 230px;
             }
             &_eclipse {
                 position: absolute;
-                top: -100px;
+                top: 10px;
                 width: 228px;
                 height: 228px;
                 flex-grow: 0;
@@ -279,7 +281,7 @@ section {
 }
 
 .dn {
-    opacity: 0;
+    display: none;
 }
 
 .zeroOpt {

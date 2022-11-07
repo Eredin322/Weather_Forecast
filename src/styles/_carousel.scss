@@ -3,12 +3,12 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding-top: 125px; 
+  padding-top: 30px; 
   &__prev, &__next {
     position: absolute;
-    bottom: -15%;
+    width: 50px;
+    bottom: -10%;
     transition: transform 0.25s ease;
-    
     i {
       font-size: 60px;
       color: var(--box-border);
@@ -16,24 +16,26 @@
     }
   }
   
-  &__prev:hover, &__next:hover { 
-    transform: scale(1.25); 
+  &__prev:hover { 
+    transform: rotate(90deg) scale(1.25); 
   }  
-  
-  &__prev { left: 40%; }
-  &__next { right: 40%; }  
+  &__next:hover {
+    transform: rotate(-90deg) scale(1.25); 
+  }
+  &__prev { left: 40%; transform: rotate(90deg)}
+  &__next { right: 40%; transform: rotate(-90deg);}  
 
   
   &__body {
-   width: 100%;
-   padding: 20px 0 50px 0;
-   overflow: hidden;
+    width: 100%;
+    padding: 100px 0 50px 0;
+    overflow: hidden;
     
     .carousel__slider {
       position: relative;
       transition: transform 1s ease-in-out;
       background: var(--crsl-bg);
-
+      margin-left: -259px;
       &__item {
         position: relative;
         display: block;
@@ -70,12 +72,6 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            box-sizing: border-box;
-            border-color: var(--box-border);
-            background: var(--box-bg);            
-            border-width: 3px;
-            border-style: solid;
-            
             h1 {
               font-size: 7em;
               width: 100%;
@@ -106,7 +102,6 @@
       }
       
       &__item--active {
-        
         .item__3d-frame {
         }
       }

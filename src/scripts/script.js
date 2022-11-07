@@ -123,6 +123,7 @@ function getCityWeatherAndAlarmIfWrongCity(){
             selectedCities[CityCount].push(data.weather[0].description);
             selectedCities[CityCount].push(data.timezone);
             selectedCities[CityCount].push(data.weather[0].main);
+            selectedCities[CityCount].push(data.weather[0].icon);
             cardCreation()
         } catch {
             document.querySelector('.alarm').classList.remove('zeroOpt');
@@ -130,11 +131,16 @@ function getCityWeatherAndAlarmIfWrongCity(){
             CityCount++;
         }
     })
-    console.log(selectedCities);
+    // console.log(selectedCities);
 }
 
 function cardCreation(){
     let card = document.createElement('div');
+    let carousel__slider__item = document.createElement('div');
+    let item__3d_frame = document.createElement('div');
+    let item__3d_frame_box = document.createElement('div');
+    let item__3d_frame_left = document.createElement('div');
+    let item__3d_frame_right = document.createElement('div');
     let icon = document.createElement('div');
     let icon_eclipse = document.createElement('div');
     let main_info = document.createElement('div');
@@ -155,6 +161,11 @@ function cardCreation(){
     weather_type.classList.add('weather_type');
     time.classList.add('time');
     GTM.classList.add('GTM');
+    carousel__slider__item.classList.add('carousel__slider__item');
+    item__3d_frame.classList.add('item__3d-frame');
+    item__3d_frame_box.classList.add('item__3d-frame__box','item__3d-frame__box--front');
+    item__3d_frame_left.classList.add('item__3d-frame__box','item__3d-frame__box--left');
+    item__3d_frame_right.classList.add('item__3d-frame__box','item__3d-frame__box--right');
 
     card.appendChild(icon);
     card.appendChild(icon_eclipse);
@@ -166,7 +177,13 @@ function cardCreation(){
     card.appendChild(time);
     card.appendChild(GTM);
 
-    document.querySelector('.card__container').prepend(card);
+    carousel__slider__item.appendChild(item__3d_frame);
+    item__3d_frame.appendChild(item__3d_frame_box);
+    item__3d_frame.appendChild(item__3d_frame_left);
+    item__3d_frame.appendChild(item__3d_frame_right);
+    item__3d_frame_box.appendChild(card);
+
+    document.querySelector('.carousel__slider').prepend(carousel__slider__item);
     fillTheCard(CityCount);
 }
 document.querySelector('.search__btn').onclick = getCityWeatherAndAlarmIfWrongCity;
@@ -192,51 +209,45 @@ function fillTheCard(index){
     const hours = today.getUTCHours();
     const minutes = today.getUTCMinutes();
     const seconds = today.getUTCSeconds();
-    if(hours + (selectedCities[index][4] / 3600) > 19){
-        if (selectedCities[index][3] == "clear sky"){
+        if (selectedCities[index][6] == "01n"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ClearNight.png">`;
-        } else if (selectedCities[index][3] === "overcast clouds" || selectedCities[index][3] == "broken clouds"){
+        } else if (selectedCities[index][6] === "04n" || selectedCities[index][3] == "03n"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/CloudyNight.png">`;
-        } else if (selectedCities[index][3] === "few clouds" || selectedCities[index][3] == "scattered clouds"){
+        } else if (selectedCities[index][6] === "02n"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/FewCloudsNight.png">`;
-        } else if (selectedCities[index][5] === "Mist"){
+        } else if (selectedCities[index][6] === "50n"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/MistNight.png">`;
-        } else if (selectedCities[index][5] === 'Drizzle'){
+        } else if (selectedCities[index][6] === '09n'){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ShowerRainNight.png">`;
-        }  else if (selectedCities[index][5] == "Rain"){
+        }  else if (selectedCities[index][6] == "10n"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainNight.png">`;
-        } else if (selectedCities[index][5] === "snow"){
+        } else if (selectedCities[index][6] === "13n"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/snowNight.png">`;
-        } else if (selectedCities[index][5] === "Thunderstorm"){
+        } else if (selectedCities[index][6] === "11n"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ThunderstormNight.png">`;
-        } else if (selectedCities[index][3] === "tornado"){
+        } else if (selectedCities[index][5] === "Tornado" || selectedCities[index][5] === "Торнадо"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/Tornado.png">`;
-        } else {
-            document.querySelector('.card .icon').innerHTML = `<img src="img/icons/AnythingElse.png">`;
-        }
-    } else {
-        if (selectedCities[index][3] == "clear sky"){
+        } else if (selectedCities[index][6] == "01d"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ClearDay.png">`;
-        } else if (selectedCities[index][3] === "overcast clouds" || selectedCities[index][3] == "broken clouds"){
+        } else if (selectedCities[index][6] === "04d" || selectedCities[index][3] == "03d"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/CloudyDay.png">`;
-        } else if (selectedCities[index][3] === "few clouds" || selectedCities[index][3] == "scattered clouds"){
+        } else if (selectedCities[index][6] === "02d"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/FewCloudsDay.png">`;
-        } else if (selectedCities[index][5] === "Mist"){
+        } else if (selectedCities[index][6] === "50d"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/MistDay.png">`;
-        } else if (selectedCities[index][5] === 'Drizzle'){
+        } else if (selectedCities[index][6] === '09d'){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ShowerRainDay.png">`;
-        }  else if (selectedCities[index][5] == "Rain"){
+        }  else if (selectedCities[index][6] == "10d"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/RainDay.png">`;
-        } else if (selectedCities[index][5] === "snow"){
+        } else if (selectedCities[index][6] === "13d"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/snowDay.png">`;
-        } else if (selectedCities[index][5] === "Thunderstorm"){
+        } else if (selectedCities[index][6] === "11d"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/ThunderstormDay.png">`;
-        } else if (selectedCities[index][3] === "tornado"){
+        } else if (selectedCities[index][5] === "Tornado" || selectedCities[index][5] === "Торнадо"){
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/Tornado.png">`;
         } else {
             document.querySelector('.card .icon').innerHTML = `<img src="img/icons/AnythingElse.png">`;
         }
-    }
     
     
     document.querySelector('.card .city_info').innerHTML = selectedCities[index][0];
@@ -255,7 +266,13 @@ function fillTheCard(index){
     } else {
         document.querySelector('.GTM').innerHTML = `GTM : ${selectedCities[index][4] / 3600}`;
     }
+    carouselActivation();
+}
 
+function carouselActivation(){
+    document.querySelector('.fa-angle-left').classList.remove('zeroOpt');
+    document.querySelector('.fa-angle-right').classList.remove('zeroOpt');
+    carousel();
 }
 
 const togglePassword = (button) => {
