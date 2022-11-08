@@ -35,4 +35,8 @@ const langArr = {
         'ru': 'Холоднее',
         'en': 'Warmest',
     },
+    'apply' : {
+        'ru': 'Применить',
+        'en': 'Apply',
+    },
 }

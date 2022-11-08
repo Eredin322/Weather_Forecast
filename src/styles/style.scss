@@ -75,7 +75,7 @@ section {
                 }
             }
         }
-        .sign_up {
+        .sign_up, .apply {
             min-width: 165px;
             height: 78px;
             text-transform: capitalize;
@@ -139,7 +139,7 @@ section {
         }
         .filter {
             position: relative;
-            width: 500px;
+            width: 50%;
             display: flex;
             justify-content: space-between;
             align-items: center;

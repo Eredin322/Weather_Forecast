@@ -24,6 +24,12 @@ function fillSearch(){
 
 document.querySelector('.search').addEventListener("focusout", fillSearch);
 
+document.addEventListener("keydown", function(event) {
+    if(event.code === 'Enter'){
+        document.querySelector('.search__btn').click();
+    }
+})
+
 function crossAppearAndAlarmDissappear(){
     if (crossCount ==  0){
         document.querySelector('.cross').classList.toggle('zeroOpt');
@@ -108,14 +114,14 @@ function changeLanguage(){
 }
 changeLanguage();
 
-
+document.querySelector('.search__btn').onclick = getCityWeatherAndAlarmIfWrongCity;
 function getCityWeatherAndAlarmIfWrongCity(){
     let val = document.querySelector('.search').value;
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
     .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
     .then(function (data){
         try{
-            console.log(data);
+            // console.log(data);
             selectedCities.push([]);
             selectedCities[CityCount].push(data.name);
             selectedCities[CityCount].push(data.main.temp);
@@ -186,7 +192,7 @@ function cardCreation(){
     document.querySelector('.carousel__slider').prepend(carousel__slider__item);
     fillTheCard(CityCount);
 }
-document.querySelector('.search__btn').onclick = getCityWeatherAndAlarmIfWrongCity;
+
 
 
 const toggleModal = () => {
@@ -270,8 +276,9 @@ function fillTheCard(index){
 }
 
 function carouselActivation(){
-    document.querySelector('.fa-angle-left').classList.remove('zeroOpt');
-    document.querySelector('.fa-angle-right').classList.remove('zeroOpt');
+    document.querySelector('.carousel__body').classList.remove('dn');
+    document.querySelector('.fa-angle-left').classList.remove('dn');
+    document.querySelector('.fa-angle-right').classList.remove('dn');
     carousel();
 }
 
@@ -280,3 +287,22 @@ const togglePassword = (button) => {
     const input = document.getElementById("password");
     input.type = input.type === "password" ? "text" : "password";
 };
+
+function filter(){
+    let cards = document.querySelectorAll('.carousel__slider__item');
+    let maxTemp = 0;
+    let maxCard;
+    let maxCards = []
+    for(let i = 0; i < cards.length; i++){
+        if(maxTemp < cards[i].children[0].children[0].children[0].children[2].children[1].innerText.slice(0,4)){
+            console.log(cards[i]);
+            maxTemp = cards[i].children[0].children[0].children[0].children[2].children[1].innerText.slice(0,4);
+            maxCard = cards[i];
+            cards[i].children[0].children[0].children[0].children[2].children[1].innerText = 0;
+        }
+        maxCards.push(maxCard);
+    }
+    console.log(cards);
+    console.log(maxCards);
+}
+document.querySelector('.apply').onclick = filter;
