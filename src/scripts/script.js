@@ -5,6 +5,7 @@ let arrow = document.querySelectorAll('.arrow');
 let hash = window.location.hash;
 let selectedCities = [];
 let CityCount = 0;
+let onloadCount = 1;
 
 function clearSearch(){
     let val = document.querySelector('.search').value;
@@ -114,14 +115,39 @@ function changeLanguage(){
 }
 changeLanguage();
 
-document.querySelector('.search__btn').onclick = getCityWeatherAndAlarmIfWrongCity;
-function getCityWeatherAndAlarmIfWrongCity(){
+document.querySelector('.search__btn').onclick = getAlarmAndSaveCityWeather;
+function getAlarmAndSaveCityWeather(){
     let val = document.querySelector('.search').value;
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
     .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
     .then(function (data){
         try{
-            // console.log(data);
+            selectedCities.push([]);
+            selectedCities[CityCount].push(data.name);
+            selectedCities[CityCount].push(data.main.temp);
+            selectedCities[CityCount].push(data.wind.speed);
+            selectedCities[CityCount].push(data.weather[0].description);
+            selectedCities[CityCount].push(data.timezone);
+            selectedCities[CityCount].push(data.weather[0].main);
+            selectedCities[CityCount].push(data.weather[0].icon);
+            cardCreation()
+            CityCount++;
+            localStorage.setItem(`City#${CityCount}`, val);
+        } catch {
+            document.querySelector('.alarm').classList.remove('zeroOpt');
+        }   
+    })
+    // console.log(selectedCities);
+}
+
+window.onload = setTimeout(function restoreCities() {
+    let val = localStorage.getItem(`City#${onloadCount}`);
+    if(val === null) return console.log('noMoreCitiesToRestore');
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=5c32ce994c3668d65bb55ab967a0bf2c&units=metric&lang=${hash}`)
+    .then(function(resp) { return resp.json() }) // Получает от fetch строку и преобразует в массив
+    .then(function (data){
+        try{
+            console.log(data);
             selectedCities.push([]);
             selectedCities[CityCount].push(data.name);
             selectedCities[CityCount].push(data.main.temp);
@@ -132,13 +158,17 @@ function getCityWeatherAndAlarmIfWrongCity(){
             selectedCities[CityCount].push(data.weather[0].icon);
             cardCreation()
         } catch {
-            document.querySelector('.alarm').classList.remove('zeroOpt');
+            // document.querySelector('.alarm').classList.remove('zeroOpt');
+            return console.log('onloadSearchError');
         } finally {
             CityCount++;
+            onloadCount++;
+            if(onloadCount < 10){
+                restoreCities();
+            }
         }
     })
-    // console.log(selectedCities);
-}
+}, 1000);
 
 function cardCreation(){
     let card = document.createElement('div');
